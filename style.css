@@ -1,0 +1,30 @@
+body {
+    background-color: antiquewhite;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0;
+    color: black;
+    font-family: sans-serif;
+    height: 100vh;
+
+} 
+
+.info {
+    margin: 50px;
+}
+
+#board {
+    border: 6px solid rgb(212, 107, 107);
+    background-color: white;
+}
+
+#resetButton {
+    margin: 50px;
+    font-family: sans-serif;
+    width: 150px;
+    height: 27px;
+    font-size: 20px;
+}
+
