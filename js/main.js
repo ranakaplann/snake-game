@@ -104,21 +104,21 @@ function placeFood(){
     function drawFood(){
         ctx.fillStyle = foodColor;
         ctx.fillRect(foodX, foodY, unitSize, unitSize);  
-        }
+    }
  
 
     function update() {
     if (gameOver) {
-        return;
+        alert("Game Over");
     }
 
-    // Yeni kafa konumunu hesapla
+    // new head coordinates
     const head = {
         x: snake[0].x + speedX,
         y: snake[0].y + speedY
     };
 
-    //  Duvara çarpma kontrolü
+    //  out of bound control
     if (
         head.x < 0 ||
         head.x >= gameWidth ||
@@ -133,7 +133,7 @@ function placeFood(){
     for (let i = 1; i < snake.length; i++) {
         if (head.x === snake[i].x && head.y === snake[i].y) {
             gameOver = true;
-            return;
+            alert("Game Over");
         }
     }
 
