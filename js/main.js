@@ -101,13 +101,13 @@ function placeFood(){
     }
 
 
-    function drawFood(){
+function drawFood(){
         ctx.fillStyle = foodColor;
         ctx.fillRect(foodX, foodY, unitSize, unitSize);  
     }
  
 
-    function update() {
+function update() {
     if (gameOver) {
         alert("Game Over");
     }
@@ -129,7 +129,7 @@ function placeFood(){
         alert("Game Over");
     }
 
-    //  Kendine çarpma kontrolü
+    //  kendine carpma kontrolu
     for (let i = 1; i < snake.length; i++) {
         if (head.x === snake[i].x && head.y === snake[i].y) {
             gameOver = true;
@@ -137,22 +137,19 @@ function placeFood(){
         }
     }
 
-    //  Kafayı başa ekle
+    //  kafayi basa ekle
     snake.unshift(head);
 
-    // Yemek yeme kontrolü
+    // yemek yeme kontrolü
     if (head.x === foodX && head.y === foodY) {
         placeFood(); // uzama var  kuyruk silinmez
     } else {
         snake.pop(); // uzama yok  kuyruk silinir
     }
 
-    // Ekranı temizle
+    // ekrani temizle
     ctx.clearRect(0, 0, gameWidth, gameHeight);
     drawFood();
     drawSnake();
 }
-
-
- 
- 
+  
