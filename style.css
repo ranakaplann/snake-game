@@ -15,6 +15,12 @@ body {
     margin: 50px;
 }
 
+#score {
+    margin: 40px;
+    color:brown;
+    font-weight: bold;
+}
+
 #board {
     border: 6px solid rgb(212, 107, 107);
     background-color: white;

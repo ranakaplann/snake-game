@@ -10,6 +10,7 @@ let speedX = unitSize;
 let speedY = 0;
 let foodX;
 let foodY;
+let score = 0;
 
 let snake= [
     {x: unitSize * 4, y:0},
@@ -26,6 +27,7 @@ window.onload = function () {
     resetButton.addEventListener("click" , pressToReset);
     placeFood();
     document.addEventListener("keydown", changeDirection); 
+    updateScore();
     setInterval(update, 1000/10);
 }
 
@@ -34,11 +36,9 @@ function pressToReset(){
      // stop the game
     gameOver = false;
 
-    // yönü başlangıca al
     speedX = unitSize;
     speedY = 0;
-
-    // yılanı başa döndür
+    
     snake = [
         { x: unitSize * 4, y: 0 },
         { x: unitSize * 3, y: 0 },
@@ -46,6 +46,9 @@ function pressToReset(){
         { x: unitSize,     y: 0 },
         { x: 0,            y: 0 }
     ];
+   
+    score = 0;
+    updateScore();
 
     // clean canvas 
     ctx.clearRect(0, 0, gameWidth, gameHeight);
@@ -101,15 +104,16 @@ function placeFood(){
     }
 
 
-    function drawFood(){
+function drawFood(){
         ctx.fillStyle = foodColor;
         ctx.fillRect(foodX, foodY, unitSize, unitSize);  
     }
  
 
-    function update() {
+function update() {
     if (gameOver) {
-        alert("Game Over");
+        drawGameOver();
+        return;
     }
 
     // new head coordinates
@@ -126,33 +130,46 @@ function placeFood(){
         head.y >= gameHeight
     ) {
         gameOver = true;
-        alert("Game Over");
     }
 
     //  Kendine çarpma kontrolü
     for (let i = 1; i < snake.length; i++) {
         if (head.x === snake[i].x && head.y === snake[i].y) {
             gameOver = true;
-            alert("Game Over");
+            drawGameOver();
         }
     }
 
-    //  Kafayı başa ekle
+    //  add head
     snake.unshift(head);
 
-    // Yemek yeme kontrolü
+    // eat food control
     if (head.x === foodX && head.y === foodY) {
-        placeFood(); // uzama var  kuyruk silinmez
+        placeFood(); // food is eaten by snake
+        score++;
+        updateScore();
     } else {
-        snake.pop(); // uzama yok  kuyruk silinir
+        snake.pop(); 
     }
 
-    // Ekranı temizle
+    // clear the canvas
     ctx.clearRect(0, 0, gameWidth, gameHeight);
     drawFood();
     drawSnake();
+    updateScore();
 }
 
 
- 
- 
+ function updateScore() {
+  document.getElementById("score").innerText = "Score: " + score;
+}
+
+ function drawGameOver() {
+    ctx.fillStyle = "rgba(0,0,0,0.7)";
+    ctx.fillRect(0, 0, gameWidth, gameHeight);
+
+    ctx.fillStyle = "white";
+    ctx.font = "40px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("GAME OVER", gameWidth / 2, gameHeight / 2);
+}
