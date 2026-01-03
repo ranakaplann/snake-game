@@ -132,7 +132,7 @@ function update() {
         gameOver = true;
     }
 
-    //  Kendine çarpma kontrolü
+    //  kendine carpma kontrolu
     for (let i = 1; i < snake.length; i++) {
         if (head.x === snake[i].x && head.y === snake[i].y) {
             gameOver = true;
@@ -140,36 +140,4 @@ function update() {
         }
     }
 
-    //  add head
-    snake.unshift(head);
 
-    // eat food control
-    if (head.x === foodX && head.y === foodY) {
-        placeFood(); // food is eaten by snake
-        score++;
-        updateScore();
-    } else {
-        snake.pop(); 
-    }
-
-    // clear the canvas
-    ctx.clearRect(0, 0, gameWidth, gameHeight);
-    drawFood();
-    drawSnake();
-    updateScore();
-}
-
-
- function updateScore() {
-  document.getElementById("score").innerText = "Score: " + score;
-}
-
- function drawGameOver() {
-    ctx.fillStyle = "rgba(0,0,0,0.7)";
-    ctx.fillRect(0, 0, gameWidth, gameHeight);
-
-    ctx.fillStyle = "white";
-    ctx.font = "40px Arial";
-    ctx.textAlign = "center";
-    ctx.fillText("GAME OVER", gameWidth / 2, gameHeight / 2);
-}
